@@ -84,9 +84,24 @@ public class GameManager : MonoBehaviour
     public Position ChangementTableau (int tableauPositionX, int tableauPositionY, Cote coteEntre)
     {
         DesactiverTableaux();
-        matrixTableaux[tableauPositionX][tableauPositionY].SetActive(true);
-        print(matrixTableaux[tableauPositionX][tableauPositionY].name);
+        GameObject current = matrixTableaux[tableauPositionX][tableauPositionY];
 
-        return new Position(2.2f, 2.2f);
+        current.SetActive(true);
+        print(current.name);
+        SpawnPoint spawn = current.GetComponent<SpawnPoint>();
+
+        switch(coteEntre)
+        {
+            case Cote.bas:
+                return new Position(spawn.basX, spawn.basY);
+            case Cote.haut:
+                return new Position(spawn.hautX, spawn.hautY);
+            case Cote.gauche:
+                return new Position(spawn.gaucheX, spawn.gaucheY);
+            case Cote.droit:
+                return new Position(spawn.droitX, spawn.droitY);
+            default:
+                return new Position(0, 0);
+        }
     }
 }
