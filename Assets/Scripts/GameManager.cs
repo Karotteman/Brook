@@ -4,28 +4,53 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public enum Cote { bas, haut, gauche, droit, erreur };
+    public class Position
+    {
+        public Position(float x, float y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+        public float x;
+        public float y;
+    };
+
     public GameObject[][] matrixTableaux; 
     public GameObject joueur;
-
-    // Start is called before the first frame update
+    
     void Start()
     {
-        int i = 0;
+        int nbRow = 3;
+        int nbCol = 3;
+        
         GameObject[] currentTableaux = GameObject.FindGameObjectsWithTag("Tableau");
 
-        Vector2 tableauxSize = new Vector2(3, 3);
+        Vector2 tableauxSize = new Vector2(nbCol, nbRow);
         matrixTableaux = new GameObject[(int)tableauxSize.x][];
 
         for (int x = 0; x < tableauxSize.x; x++)
         {
             matrixTableaux[x] = new GameObject[(int)tableauxSize.y];
-            for (int y = 0; y < tableauxSize.y; y++)
+        }
+
+        
+        for (int x = 0, i = 0; x < tableauxSize.x; x++)
+        {
+            for (int y = 0; y < tableauxSize.y; y++, i++)
             {
-                // manipulate gameobject here
-                matrixTableaux[x][y] = currentTableaux[i];
-                i++;
+                string name = currentTableaux[i].name;
+                int reverseId = name[name.Length - 1] - '0';
+
+                int id = (nbRow * nbCol) - reverseId;
+
+                int row = id % nbRow;
+                int col = id / nbCol;
+
+                matrixTableaux[col][row] = currentTableaux[i];
             }
         }
+
         DesactiverTableaux();
         matrixTableaux[1][0].SetActive(true);
     }
@@ -56,10 +81,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ChangementTableau (int tableauPositionX, int tableauPositionY)
+    public Position ChangementTableau (int tableauPositionX, int tableauPositionY, Cote coteEntre)
     {
         DesactiverTableaux();
         matrixTableaux[tableauPositionX][tableauPositionY].SetActive(true);
         print(matrixTableaux[tableauPositionX][tableauPositionY].name);
+
+        return new Position(2.2f, 2.2f);
     }
 }

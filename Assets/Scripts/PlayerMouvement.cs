@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMouvement : MonoBehaviour
 {
 
+
     [Header("Player Motor")]
     //[Range(1f, 15f)]
     public float walkSpeed;
@@ -39,11 +40,14 @@ public class PlayerMouvement : MonoBehaviour
 
     }
 
-    public void TeleportationNouveauTableau()
+    public void TeleportationNouveauTableau(float newX, float newY)
     {
         enabled = false;
-        float positionX = -transform.position.x / Mathf.Abs(transform.position.x) * spawnPosition;
-        float positionY = -transform.position.z / Mathf.Abs(transform.position.z) * spawnPosition;
+        //float positionX = -transform.position.x / Mathf.Abs(transform.position.x) * spawnPosition;
+        //float positionY = -transform.position.z / Mathf.Abs(transform.position.z) * spawnPosition;
+
+        float positionX = newX;
+        float positionY = newY;
 
         transform.position = new Vector3(positionX, transform.position.y, positionY);
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class JoueurCollision : MonoBehaviour
 {
-    PlayerMouvement mouvementJoueur ;
+    PlayerMouvement mouvementJoueur;
     public GameManager manager;
 
     // Start is called before the first frame update
@@ -30,6 +30,7 @@ public class JoueurCollision : MonoBehaviour
             Vector2 prochainTableau = manager.CheckTableauActif();
             int tableauPositionX = (int)prochainTableau.x;
             int tableauPositionY = (int)prochainTableau.y;
+            GameManager.Cote coteEntre;
 
             switch (collider.gameObject.name)
             {
@@ -38,26 +39,31 @@ public class JoueurCollision : MonoBehaviour
                     {
                         tableauPositionX -= 1;
                     }
+                    coteEntre = GameManager.Cote.bas;
                     break;
                 case "TriggerBas":
                     if ((int)prochainTableau.x + 1 <= 2)
                     {
                         tableauPositionX += 1;
                     }
+                    coteEntre = GameManager.Cote.haut;
                     break;
                 case "TriggerDroite":
                     if ((int)prochainTableau.y + 1 <= 2)
                     {
                         tableauPositionY += 1;
                     }
+                    coteEntre = GameManager.Cote.gauche;
                     break;
                 case "TriggerGauche":
                     if ((int)prochainTableau.y - 1 >= 0)
                     {
                         tableauPositionY -= 1;
                     }
+                    coteEntre = GameManager.Cote.droit;
                     break;
                 default:
+                    coteEntre = GameManager.Cote.erreur;
                     break;
             }
             print(tableauPositionX);
@@ -67,10 +73,10 @@ public class JoueurCollision : MonoBehaviour
             {
                 //mouvementJoueur.TeleportationNouveauTableau();
 
-                mouvementJoueur.TeleportationNouveauTableau();
-                Invoke("TrueEnabledMouvementJoueur", 2);
+                GameManager.Position spawnPoint = manager.ChangementTableau(tableauPositionX, tableauPositionY, coteEntre);
 
-                manager.ChangementTableau(tableauPositionX, tableauPositionY);
+                mouvementJoueur.TeleportationNouveauTableau(spawnPoint.x, spawnPoint.y);
+                Invoke("TrueEnabledMouvementJoueur", 2);
             }
         }
     }
