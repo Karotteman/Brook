@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
             }
         }
         DesactiverTableaux();
-        matrixTableaux[2][2].SetActive(true);
+        matrixTableaux[1][0].SetActive(true);
     }
 
     public Vector2 CheckTableauActif()

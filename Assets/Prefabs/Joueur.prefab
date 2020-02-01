@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3390354836706017112}
   - component: {fileID: 7942967294149366047}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Joueur
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b9f4b565097a740a0adcdfc74b3daf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 0
+  walkSpeed: 500
+  spawnPosition: 4.4
 --- !u!143 &7942967294149366047
 CharacterController:
   m_ObjectHideFlags: 0

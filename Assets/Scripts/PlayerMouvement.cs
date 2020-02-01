@@ -8,7 +8,7 @@ public class PlayerMouvement : MonoBehaviour
     [Header("Player Motor")]
     //[Range(1f, 15f)]
     public float walkSpeed;
-    public float spawnPosition = 2.8f;
+    public float spawnPosition = 4.4f;
 
     CharacterController characterController;
 
