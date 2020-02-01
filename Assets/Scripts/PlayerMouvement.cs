@@ -8,6 +8,7 @@ public class PlayerMouvement : MonoBehaviour
     [Header("Player Motor")]
     //[Range(1f, 15f)]
     public float walkSpeed;
+    public float spawnPosition = 2.8f;
 
     CharacterController characterController;
 
@@ -36,5 +37,14 @@ public class PlayerMouvement : MonoBehaviour
         }
         characterController.SimpleMove(direction * walkSpeed * Time.deltaTime);
 
+    }
+
+    public void TeleportationNouveauTableau()
+    {
+        enabled = false;
+        float positionX = -transform.position.x / Mathf.Abs(transform.position.x) * spawnPosition;
+        float positionY = -transform.position.z / Mathf.Abs(transform.position.z) * spawnPosition;
+
+        transform.position = new Vector3(positionX, transform.position.y, positionY);
     }
 }
