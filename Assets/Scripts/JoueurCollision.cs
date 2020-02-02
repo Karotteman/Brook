@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class JoueurCollision : MonoBehaviour
@@ -18,6 +19,7 @@ public class JoueurCollision : MonoBehaviour
     private bool asCaddie = false;
     private bool asVolant = false;
 
+    private bool boisSortie = false;
     private bool moteurSortie = false;
     private bool volantSortie = false;
 
@@ -106,7 +108,7 @@ public class JoueurCollision : MonoBehaviour
                 GameObject item = collider.transform.GetChild(0).gameObject;
                 if (item.CompareTag("Bois"))
                 {
-                    if (!boisFait)
+                    if (!boisFait && boisSortie)
                     {
                         contenuCaddie = Contenu.bois;
                         boisFait = true;
@@ -208,13 +210,9 @@ public class JoueurCollision : MonoBehaviour
             {
                 if (!boisFait)
                 {
-                    if(item.activeSelf)
+                    if(boisSortie)
                     {
-                        if (asCaddie)
-                        {
-                            AfficherIndice(2); // F
-                        }
-                        else
+                        if (!asCaddie)
                         {
                             AfficherIndice(8); // Caddie
                         }
@@ -266,11 +264,7 @@ public class JoueurCollision : MonoBehaviour
                 {
                     if (moteurSortie)
                     {
-                        if (asCaddie)
-                        {
-                            AfficherIndice(2); // F
-                        }
-                        else
+                        if (!asCaddie)
                         {
                             AfficherIndice(8); // Caddie
                         }
@@ -384,14 +378,22 @@ public class JoueurCollision : MonoBehaviour
                         GameObject tableau = manager.GetTableauActif();
 
                         caddie.parent = tableau.transform;
-                        
+                        //caddie.gameObject.SetActive(true);
+
+                        //GameObject caddieAlligne = transform.GetChild(5).gameObject;
+                        //caddieAlligne.SetActive(false);
                         asCaddie = false;
                     }
                     else
                     {
                         CacherIndice();
                         Transform espaceCaddie = transform.GetChild(3).transform;
+
                         collider.transform.parent = espaceCaddie;
+                        //collider.gameObject.SetActive(false);
+
+                        //GameObject caddieAlligne = transform.GetChild(5).gameObject;
+                        //caddieAlligne.SetActive(true);
                         asCaddie = true;
                     }
                 }
@@ -402,6 +404,7 @@ public class JoueurCollision : MonoBehaviour
                     if (item.CompareTag("Bois") && deuxiemeBras == Bras.hache)
                     {
                         item.SetActive(true);
+                        boisSortie = true;
                     }
 
                     if (item.CompareTag("Volant"))
@@ -472,8 +475,7 @@ public class JoueurCollision : MonoBehaviour
 
     public void FinDuJeu()
     {
-        transform.position += new Vector3(0,-5,0);
-        Reinitialiser();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void Reinitialiser()
