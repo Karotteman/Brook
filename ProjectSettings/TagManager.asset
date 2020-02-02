@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Trigger
   - Tableau
+  - SwapZone
   layers:
   - Default
   - TransparentFX
