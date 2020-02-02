@@ -210,7 +210,7 @@ public class JoueurCollision : MonoBehaviour
 
         else if (collider.gameObject.CompareTag("Pickup"))
         {
-            if(contenuCaddie != Contenu.vide || asVolant)
+            if(asCaddie && contenuCaddie != Contenu.vide || asVolant)
             {
                 AfficherIndice(0); // Bateau
                 return;
