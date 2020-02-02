@@ -79,7 +79,7 @@ public class JoueurCollision : MonoBehaviour
                 GameManager.Position spawnPoint = manager.ChangementTableau(tableauPositionX, tableauPositionY, coteEntre);
 
                 mouvementJoueur.TeleportationNouveauTableau(spawnPoint.x, spawnPoint.y);
-                Invoke("TrueEnabledMouvementJoueur", 2);
+                Invoke("TrueEnabledMouvementJoueur", 1);
             }
         }
 
@@ -112,8 +112,9 @@ public class JoueurCollision : MonoBehaviour
 
             GameObject bras = transform.GetChild(0).gameObject;
             GameObject oldItem = bras.transform.GetChild(0).gameObject;
-
+            
             oldItem.transform.parent = swapZone;
+            oldItem.transform.position = swapZone.transform.position;
             newItem.transform.parent = bras.transform;
         }
 
