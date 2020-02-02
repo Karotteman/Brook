@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class JoueurCollision : MonoBehaviour
@@ -275,8 +276,7 @@ public class JoueurCollision : MonoBehaviour
 
     public void FinDuJeu()
     {
-        transform.position += new Vector3(0,-5,0);
-        Reinitialiser();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void Reinitialiser()
