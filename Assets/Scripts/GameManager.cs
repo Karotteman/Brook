@@ -70,6 +70,21 @@ public class GameManager : MonoBehaviour
         return Vector2.zero;
     }
 
+    public GameObject GetTableauActif()
+    {
+        for (int i = 0; i < matrixTableaux.Length; i++)
+        {
+            for (int j = 0; j < matrixTableaux[i].Length; j++)
+            {
+                if (matrixTableaux[i][j].activeSelf)
+                {
+                    return matrixTableaux[i][j];
+                }
+            }
+        }
+        return new GameObject();
+    }
+
     public void DesactiverTableaux()
     {
         for (int i = 0; i < matrixTableaux.Length; i++)
