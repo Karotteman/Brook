@@ -186,7 +186,7 @@ public class JoueurCollision : MonoBehaviour
             }
             if(deuxiemeBras == Bras.bras)
             {
-                AfficherIndice(2); // Q
+                AfficherIndice(2); // F
             }
             else
             {
@@ -211,7 +211,7 @@ public class JoueurCollision : MonoBehaviour
                     {
                         if (asCaddie)
                         {
-                            AfficherIndice(2); // Q
+                            AfficherIndice(2); // F
                         }
                         else
                         {
@@ -222,7 +222,7 @@ public class JoueurCollision : MonoBehaviour
                     {
                         if (deuxiemeBras == Bras.hache)
                         {
-                            AfficherIndice(2); // Q
+                            AfficherIndice(2); // F
                         }
                         else
                         {
@@ -239,7 +239,7 @@ public class JoueurCollision : MonoBehaviour
                     {
                         if (deuxiemeBras == Bras.bras)
                         {
-                            AfficherIndice(2); // Q
+                            AfficherIndice(2); // F
                         }
                         else
                         {
@@ -250,7 +250,7 @@ public class JoueurCollision : MonoBehaviour
                     {
                         if (deuxiemeBras == Bras.pelle)
                         {
-                            AfficherIndice(2); // Q
+                            AfficherIndice(2); // F
                         }
                         else
                         {
@@ -267,7 +267,7 @@ public class JoueurCollision : MonoBehaviour
                     {
                         if (asCaddie)
                         {
-                            AfficherIndice(2); // Q
+                            AfficherIndice(2); // F
                         }
                         else
                         {
@@ -278,7 +278,7 @@ public class JoueurCollision : MonoBehaviour
                     {
                         if (deuxiemeBras == Bras.piedBiche)
                         {
-                            AfficherIndice(2); // Q
+                            AfficherIndice(2); // F
                         }
                         else
                         {
