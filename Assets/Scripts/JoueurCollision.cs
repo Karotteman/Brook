@@ -35,7 +35,7 @@ public class JoueurCollision : MonoBehaviour
             switch (collider.gameObject.name)
             {
                 case "TriggerHaut":
-                    if((int)prochainTableau.x - 1 >= 0)
+                    if ((int)prochainTableau.x - 1 >= 0)
                     {
                         tableauPositionX -= 1;
                     }
@@ -77,6 +77,27 @@ public class JoueurCollision : MonoBehaviour
 
                 mouvementJoueur.TeleportationNouveauTableau(spawnPoint.x, spawnPoint.y);
                 Invoke("TrueEnabledMouvementJoueur", 2);
+            }
+        }
+    }
+
+    public void OnTriggerStay(Collider collider)
+    {
+        if (collider.gameObject.CompareTag("SwapZone"))
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    Transform swapZone = collider.gameObject.transform;
+                    GameObject newItem = swapZone.GetChild(0).gameObject;
+
+                    GameObject temp = transform.GetChild(0).gameObject;
+                    GameObject oldItem = temp.transform.GetChild(0).gameObject;
+
+                    oldItem.transform.parent = swapZone;
+                    newItem.transform.parent = temp.transform;
+                }
             }
         }
     }
