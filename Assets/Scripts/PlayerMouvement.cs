@@ -49,6 +49,7 @@ public class PlayerMouvement : MonoBehaviour
         }
         characterController.SimpleMove(direction * walkSpeed * Time.deltaTime);
 
+        transform.GetChild(4).transform.rotation = Quaternion.identity;
     }
 
     public void TeleportationNouveauTableau(float positionX, float positionY, float positionZ)

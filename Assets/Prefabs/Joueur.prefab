@@ -708,6 +708,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 679993507762279565}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: e5240a5712d9d74499392e7570afbce2,
+        type: 3}
+      propertyPath: m_Name
+      value: bras_bras
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: e5240a5712d9d74499392e7570afbce2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: e5240a5712d9d74499392e7570afbce2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -777,16 +787,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: e5240a5712d9d74499392e7570afbce2,
-        type: 3}
-      propertyPath: m_Name
-      value: bras_bras
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: e5240a5712d9d74499392e7570afbce2,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7205888673918785262, guid: e5240a5712d9d74499392e7570afbce2,
         type: 3}
