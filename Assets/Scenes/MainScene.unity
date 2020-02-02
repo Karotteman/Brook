@@ -3451,6 +3451,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 75
       objectReference: {fileID: 0}
+    - target: {fileID: -2325344711629719415, guid: b95f904fda0d8a34d95573cef4b254ee,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b5cb15265cd94da40aed2968e35a7f23, type: 2}
     - target: {fileID: 3453597778570850931, guid: b95f904fda0d8a34d95573cef4b254ee,
         type: 3}
       propertyPath: m_IsActive
@@ -3461,6 +3466,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Bois
       objectReference: {fileID: 0}
+    - target: {fileID: 4890352028268801672, guid: b95f904fda0d8a34d95573cef4b254ee,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7ae8b2b79d9c3934db09f0df8a1a79ee, type: 2}
     - target: {fileID: 6731562540649801642, guid: b95f904fda0d8a34d95573cef4b254ee,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -3521,6 +3531,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9032129986148628451, guid: b95f904fda0d8a34d95573cef4b254ee,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3d307ef9a165e5f48834c173b3aea822, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b95f904fda0d8a34d95573cef4b254ee, type: 3}
 --- !u!1 &875980141 stripped
