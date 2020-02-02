@@ -117,24 +117,25 @@ public class JoueurCollision : MonoBehaviour
                         contenuCaddie = Contenu.bois;
                         boisFait = true;
                         item.SetActive(false);
-                    }
-                    else
-                    {
-                        SelectHint(collider);
-                        return;
+                        SetCaddieActiveByTag("Bois", true);
                     }
                 }
                 else if (item.CompareTag("Essence"))
                 {
-                    contenuCaddie = Contenu.essence;
-                    essenceFait = true;
-                    item.SetActive(false);
+                    if (!essenceFait)
+                    {
+                        contenuCaddie = Contenu.essence;
+                        essenceFait = true;
+                        item.SetActive(false);
+                        SetCaddieActiveByTag("Essence", true);
+                    }
                 }
-                else if (item.CompareTag("Moteur") && moteurSortie)
+                else if (item.CompareTag("Moteur") && !moteurFait && moteurSortie)
                 {
                     contenuCaddie = Contenu.moteur;
                     moteurFait = true;
                     item.SetActive(false);
+                    SetCaddieActiveByTag("Moteur", true);
                 }
                 transform.GetChild(3).transform.gameObject.GetComponent<AudioSource>().Play();
             }
@@ -150,6 +151,10 @@ public class JoueurCollision : MonoBehaviour
                 {
                     tag = "Moteur";
                 }
+                else if (contenuCaddie == Contenu.essence)
+                {
+                    tag = "Essence";
+                }
 
                 if (!System.String.IsNullOrEmpty(tag))
 
@@ -162,6 +167,8 @@ public class JoueurCollision : MonoBehaviour
                             break;
                         }
                     }
+
+                    SetCaddieActiveByTag(tag, false);
                 }
 
                 asVolant = false;
@@ -449,6 +456,19 @@ public class JoueurCollision : MonoBehaviour
         {
             transform.GetChild(4).gameObject.transform.GetChild(hintIndex).gameObject.SetActive(false);
             hintIndex = -1;
+        }
+    }
+
+    void SetCaddieActiveByTag(string tag, bool value)
+    {
+        Transform caddie = transform.GetChild(5).gameObject.transform;
+        foreach (Transform group in caddie)
+        {
+            if (group.CompareTag(tag))
+            {
+                group.gameObject.SetActive(value);
+                break;
+            }
         }
     }
     
