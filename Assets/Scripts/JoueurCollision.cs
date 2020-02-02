@@ -76,7 +76,7 @@ public class JoueurCollision : MonoBehaviour
                 GameManager.Position spawnPoint = manager.ChangementTableau(tableauPositionX, tableauPositionY, coteEntre);
 
                 mouvementJoueur.TeleportationNouveauTableau(spawnPoint.x, spawnPoint.y);
-                Invoke("TrueEnabledMouvementJoueur", 2);
+                Invoke("TrueEnabledMouvementJoueur", 1);
             }
         }
     }
