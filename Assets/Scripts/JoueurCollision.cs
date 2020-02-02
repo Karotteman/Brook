@@ -139,8 +139,15 @@ public class JoueurCollision : MonoBehaviour
                 }
                 transform.GetChild(3).transform.gameObject.GetComponent<AudioSource>().Play();
             }
-            else if (collider.gameObject.CompareTag("DropZone") && contenuCaddie != Contenu.vide)
+            else if (collider.gameObject.CompareTag("DropZone"))
             {
+                asVolant = false;
+
+                if(contenuCaddie == Contenu.vide)
+                {
+                    return;
+                }
+
                 Transform bateau = collider.gameObject.transform.GetChild(0);
                 string tag = "";
                 if (contenuCaddie == Contenu.bois)
@@ -171,7 +178,6 @@ public class JoueurCollision : MonoBehaviour
                     SetCaddieActiveByTag(tag, false);
                 }
 
-                asVolant = false;
                 contenuCaddie = Contenu.vide;
                 collider.gameObject.GetComponent<AudioSource>().Play();
             }
