@@ -7,13 +7,15 @@ public class GameManager : MonoBehaviour
     public enum Cote { bas, haut, gauche, droit, erreur };
     public class Position
     {
-        public Position(float x, float y)
+        public Position(float x, float y, float z)
         {
             this.x = x;
             this.y = y;
+            this.z = z;
         }
         public float x;
         public float y;
+        public float z;
     };
 
     public GameObject[][] matrixTableaux; 
@@ -108,15 +110,15 @@ public class GameManager : MonoBehaviour
         switch(coteEntre)
         {
             case Cote.bas:
-                return new Position(spawn.basX, spawn.basY);
+                return new Position(spawn.basX, spawn.basY, spawn.basH);
             case Cote.haut:
-                return new Position(spawn.hautX, spawn.hautY);
+                return new Position(spawn.hautX, spawn.hautY, spawn.hautH);
             case Cote.gauche:
-                return new Position(spawn.gaucheX, spawn.gaucheY);
+                return new Position(spawn.gaucheX, spawn.gaucheY, spawn.gaucheH);
             case Cote.droit:
-                return new Position(spawn.droitX, spawn.droitY);
+                return new Position(spawn.droitX, spawn.droitY, spawn.droitH);
             default:
-                return new Position(0, 0);
+                return new Position(0, 0, 0);
         }
     }
 }

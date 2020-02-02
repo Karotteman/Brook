@@ -13,6 +13,7 @@ public class JoueurCollision : MonoBehaviour
 
     private Contenu contenuCaddie = Contenu.vide;
     private Bras deuxiemeBras = Bras.aucun;
+    private AudioSource audio;
 
     private bool asCaddie = false;
     private bool asVolant = false;
@@ -31,6 +32,7 @@ public class JoueurCollision : MonoBehaviour
     void Start()
     {
         mouvementJoueur = GetComponentInParent<PlayerMouvement>();
+        audio = GetComponentInParent<AudioSource>();
     }
 
     public void TrueEnabledMouvementJoueur()
@@ -86,8 +88,6 @@ public class JoueurCollision : MonoBehaviour
                     coteEntre = GameManager.Cote.erreur;
                     break;
             }
-            print(tableauPositionX);
-            print(tableauPositionY);
 
             if (tableauPositionX != (int)prochainTableau.x || tableauPositionY != (int)prochainTableau.y)
             {
@@ -95,8 +95,8 @@ public class JoueurCollision : MonoBehaviour
 
                 GameManager.Position spawnPoint = manager.ChangementTableau(tableauPositionX, tableauPositionY, coteEntre);
 
-                mouvementJoueur.TeleportationNouveauTableau(spawnPoint.x, spawnPoint.y);
-                Invoke("TrueEnabledMouvementJoueur", 1);
+                mouvementJoueur.TeleportationNouveauTableau(spawnPoint.x, spawnPoint.y, spawnPoint.z);
+                Invoke("TrueEnabledMouvementJoueur", 0.5f);
             }
         }
         else if (asCaddie)
@@ -159,6 +159,7 @@ public class JoueurCollision : MonoBehaviour
 
                 asVolant = false;
                 contenuCaddie = Contenu.vide;
+                collider.gameObject.GetComponent<AudioSource>().Play();
             }
         }
 
@@ -364,9 +365,11 @@ public class JoueurCollision : MonoBehaviour
             oldItem.SetActive(true);
             newItem.transform.parent = espaceBras.transform;
             newItem.SetActive(false);
+
+            audio.Play();
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             if (!asVolant)
             {
@@ -381,6 +384,7 @@ public class JoueurCollision : MonoBehaviour
 
                         caddie.parent = tableau.transform;
 
+<<<<<<< HEAD
                         asCaddie = false;
                     }
                     else
@@ -390,6 +394,16 @@ public class JoueurCollision : MonoBehaviour
                         collider.transform.parent = espaceCaddie;
                         asCaddie = true;
                     }
+=======
+                    asCaddie = false;
+                }
+                else
+                {
+                    Transform espaceCaddie = transform.GetChild(3).transform;
+                    collider.transform.parent = espaceCaddie;
+                    print(espaceCaddie);
+                    asCaddie = true;
+>>>>>>> e354071a87ca64e84c74d0f7e1591a19ab41bddd
                 }
 
                 if (collider.gameObject.CompareTag("Pickup"))

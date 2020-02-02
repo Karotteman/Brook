@@ -52,9 +52,9 @@ public class PlayerMouvement : MonoBehaviour
         transform.GetChild(4).transform.rotation = Quaternion.identity;
     }
 
-    public void TeleportationNouveauTableau(float positionX, float positionY)
+    public void TeleportationNouveauTableau(float positionX, float positionY, float positionZ)
     {
         enabled = false;
-        transform.position = new Vector3(positionX, transform.position.y, positionY);
+        transform.position = new Vector3(positionX, positionZ, positionY);
     }
 }
