@@ -129,6 +129,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8278083}
+  - component: {fileID: 8278084}
   m_Layer: 0
   m_Name: Tableau6
   m_TagString: Tableau
@@ -151,6 +152,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8278084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8278082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79ea83b4d951203469a024fc6ec31040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hautX: 7
+  hautY: 0
+  droitX: 5
+  droitY: -3
+  basX: -4
+  basY: -5
+  gaucheX: 0
+  gaucheY: 0
 --- !u!1 &74633697
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,6 +181,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 74633698}
+  - component: {fileID: 74633699}
   m_Layer: 0
   m_Name: Tableau7
   m_TagString: Tableau
@@ -182,6 +204,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &74633699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 74633697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79ea83b4d951203469a024fc6ec31040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hautX: 0
+  hautY: 0
+  droitX: 0
+  droitY: 0
+  basX: 0
+  basY: 0
+  gaucheX: 0
+  gaucheY: 0
 --- !u!1001 &92670681
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -683,6 +725,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 420242296}
+  - component: {fileID: 420242297}
   m_Layer: 0
   m_Name: Tableau4
   m_TagString: Tableau
@@ -705,6 +748,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &420242297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 420242295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79ea83b4d951203469a024fc6ec31040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hautX: 0
+  hautY: 0
+  droitX: 0
+  droitY: 0
+  basX: 0
+  basY: 0
+  gaucheX: 0
+  gaucheY: 0
 --- !u!1 &422300736
 GameObject:
   m_ObjectHideFlags: 0
@@ -1316,6 +1379,7 @@ GameObject:
   m_Component:
   - component: {fileID: 711002511}
   - component: {fileID: 711002510}
+  - component: {fileID: 711002512}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1350,6 +1414,102 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &711002512
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711002509}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 2662c80f8a84c8144a5c38f078d0cd75, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &711909634
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1734,6 +1894,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 756722965}
+  - component: {fileID: 756722966}
   m_Layer: 0
   m_Name: Tableau5
   m_TagString: Tableau
@@ -1756,6 +1917,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &756722966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756722964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79ea83b4d951203469a024fc6ec31040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hautX: 0
+  hautY: 0
+  droitX: 0
+  droitY: 0
+  basX: 0
+  basY: 0
+  gaucheX: 0
+  gaucheY: 0
 --- !u!1 &777743654
 GameObject:
   m_ObjectHideFlags: 0
@@ -2031,6 +2212,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 986815744}
+  - component: {fileID: 986815745}
   m_Layer: 0
   m_Name: Tableau8
   m_TagString: Tableau
@@ -2053,6 +2235,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &986815745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 986815743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79ea83b4d951203469a024fc6ec31040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hautX: 0
+  hautY: 0
+  droitX: 0
+  droitY: 0
+  basX: 0
+  basY: 0
+  gaucheX: 0
+  gaucheY: 0
 --- !u!1 &1013400458 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 338605142960667791, guid: 57e5afc435cc1b343862611c2a04e7ea,
@@ -2247,6 +2449,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: map_02_finale
       objectReference: {fileID: 0}
+    - target: {fileID: -8844463081660633793, guid: e76764f5b8e32e640956fde5ca5d4972,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 15edefdc219055a448626220b116fcf3, type: 2}
+    - target: {fileID: -8435568306975724407, guid: e76764f5b8e32e640956fde5ca5d4972,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: aa2e53829cbdfed448497e914d043703, type: 2}
+    - target: {fileID: -8221963241362319999, guid: e76764f5b8e32e640956fde5ca5d4972,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ef0dc9570f66df8478af03ba83fb8a01, type: 2}
+    - target: {fileID: -6434590018773005939, guid: e76764f5b8e32e640956fde5ca5d4972,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ef0dc9570f66df8478af03ba83fb8a01, type: 2}
+    - target: {fileID: -6388302488119672668, guid: e76764f5b8e32e640956fde5ca5d4972,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: aa2e53829cbdfed448497e914d043703, type: 2}
+    - target: {fileID: -6283877591383234665, guid: e76764f5b8e32e640956fde5ca5d4972,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: aa2e53829cbdfed448497e914d043703, type: 2}
     - target: {fileID: -4216859302048453862, guid: e76764f5b8e32e640956fde5ca5d4972,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2321,7 +2553,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 15edefdc219055a448626220b116fcf3, type: 2}
+      objectReference: {fileID: 2100000, guid: b2676682258b1a4409b08e48370acf93, type: 2}
     - target: {fileID: -8435568306975724407, guid: e76764f5b8e32e640956fde5ca5d4972,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2633,6 +2865,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1454275396}
+  - component: {fileID: 1454275397}
   m_Layer: 0
   m_Name: Tableau9
   m_TagString: Tableau
@@ -2655,6 +2888,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1454275397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454275395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79ea83b4d951203469a024fc6ec31040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hautX: 0
+  hautY: 0
+  droitX: 0
+  droitY: 0
+  basX: 0
+  basY: 0
+  gaucheX: 0
+  gaucheY: 0
 --- !u!1 &1476995702
 GameObject:
   m_ObjectHideFlags: 0
@@ -2776,6 +3029,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1580558565}
+  - component: {fileID: 1580558566}
   m_Layer: 0
   m_Name: Tableau1
   m_TagString: Tableau
@@ -2798,6 +3052,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1580558566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580558564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79ea83b4d951203469a024fc6ec31040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hautX: 0
+  hautY: 0
+  droitX: 0
+  droitY: 0
+  basX: 0
+  basY: 0
+  gaucheX: 0
+  gaucheY: 0
 --- !u!1 &1723793701
 GameObject:
   m_ObjectHideFlags: 0
@@ -2912,7 +3186,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 90e73e8ae92d3154bbccb2ab1bdb5769,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.4
+      value: -1.13
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 90e73e8ae92d3154bbccb2ab1bdb5769,
         type: 3}
@@ -2922,7 +3196,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 90e73e8ae92d3154bbccb2ab1bdb5769,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.69
+      value: 0.58
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 90e73e8ae92d3154bbccb2ab1bdb5769,
         type: 3}
@@ -3604,6 +3878,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1914049489}
+  - component: {fileID: 1914049490}
   m_Layer: 0
   m_Name: Tableau3
   m_TagString: Tableau
@@ -3669,6 +3944,26 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  --- !u!114 &1914049490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914049488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79ea83b4d951203469a024fc6ec31040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hautX: 4
+  hautY: 4
+  droitX: 7
+  droitY: -2
+  basX: 0
+  basY: 0
+  gaucheX: 0
+  gaucheY: 0
 --- !u!1 &1972680766
 GameObject:
   m_ObjectHideFlags: 0
@@ -3678,6 +3973,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1972680767}
+  - component: {fileID: 1972680768}
   m_Layer: 0
   m_Name: Tableau2
   m_TagString: Tableau
@@ -3700,6 +3996,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1972680768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1972680766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79ea83b4d951203469a024fc6ec31040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hautX: 0
+  hautY: 0
+  droitX: 0
+  droitY: 0
+  basX: 0
+  basY: 0
+  gaucheX: -3.5
+  gaucheY: 5
 --- !u!1 &1980984950 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8974196971218187919, guid: 57e5afc435cc1b343862611c2a04e7ea,
