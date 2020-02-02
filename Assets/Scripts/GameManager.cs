@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
         }
 
         DesactiverTableaux();
-        matrixTableaux[1][0].SetActive(true);
+        matrixTableaux[2][1].SetActive(true);
     }
 
     public Vector2 CheckTableauActif()
@@ -68,6 +68,21 @@ public class GameManager : MonoBehaviour
             }
         }
         return Vector2.zero;
+    }
+
+    public GameObject GetTableauActif()
+    {
+        for (int i = 0; i < matrixTableaux.Length; i++)
+        {
+            for (int j = 0; j < matrixTableaux[i].Length; j++)
+            {
+                if (matrixTableaux[i][j].activeSelf)
+                {
+                    return matrixTableaux[i][j];
+                }
+            }
+        }
+        return new GameObject();
     }
 
     public void DesactiverTableaux()

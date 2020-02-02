@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Trigger
   - Tableau
+  - PieceBateau
+  - SwapZone
+  - Caddie
+  - Pickup
   layers:
   - Default
   - TransparentFX

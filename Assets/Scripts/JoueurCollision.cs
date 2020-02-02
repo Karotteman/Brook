@@ -7,6 +7,9 @@ public class JoueurCollision : MonoBehaviour
     PlayerMouvement mouvementJoueur;
     public GameManager manager;
 
+    private bool asCaddie = false;
+    private bool caddieFull = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -76,8 +79,65 @@ public class JoueurCollision : MonoBehaviour
                 GameManager.Position spawnPoint = manager.ChangementTableau(tableauPositionX, tableauPositionY, coteEntre);
 
                 mouvementJoueur.TeleportationNouveauTableau(spawnPoint.x, spawnPoint.y);
-                Invoke("TrueEnabledMouvementJoueur", 2);
+                Invoke("TrueEnabledMouvementJoueur", 1);
             }
+        }
+
+        else if (collider.gameObject.CompareTag("Pickup") && asCaddie)
+        {
+            GameObject item = collider.transform.GetChild(0).gameObject;
+            if (item.CompareTag(""))
+            {
+            }
+            else if(item.CompareTag(""))
+            {
+            }
+            else if (item.CompareTag(""))
+            {
+            }
+        }
+    }
+
+    public void OnTriggerStay(Collider collider)
+    {
+        if (Input.GetKeyDown(KeyCode.E) && collider.gameObject.CompareTag("SwapZone"))
+        {
+            if (asCaddie)
+            {
+                return;
+            }
+
+            Transform swapZone = collider.gameObject.transform;
+            GameObject newItem = swapZone.GetChild(0).gameObject;
+
+            GameObject bras = transform.GetChild(0).gameObject;
+            GameObject oldItem = bras.transform.GetChild(0).gameObject;
+            
+            oldItem.transform.parent = swapZone;
+            oldItem.transform.position = swapZone.transform.position;
+            newItem.transform.parent = bras.transform;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q) && collider.gameObject.CompareTag("Caddie"))
+        {
+            if (asCaddie)
+            {
+                Transform espaceCaddie = transform.GetChild(1).transform;
+                Transform caddie = espaceCaddie.GetChild(0).transform;
+
+                GameObject tableau = manager.GetTableauActif();
+
+                caddie.parent = tableau.transform;
+            }
+            else
+            {
+                if(true) // (robot have 2 arms)
+                {
+                    Transform espaceCaddie = transform.GetChild(1).transform;
+                    collider.transform.parent = espaceCaddie;
+                }
+            }
+            asCaddie = !asCaddie;
         }
     }
 
