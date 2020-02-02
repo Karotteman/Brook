@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,6 +15,8 @@ public class JoueurCollision : MonoBehaviour
     private Bras deuxiemeBras = Bras.aucun;
 
     private bool asCaddie = false;
+    private bool asVolant = false;
+
     private bool moteurSortie = false;
     private bool volantSortie = false;
 
@@ -21,6 +24,8 @@ public class JoueurCollision : MonoBehaviour
     private bool essenceFait = false;
     private bool moteurFait = false;
     private bool volantFait = false;
+
+    private int hintIndex = -1;
 
     // Start is called before the first frame update
     void Start()
@@ -109,6 +114,7 @@ public class JoueurCollision : MonoBehaviour
                     }
                     else
                     {
+                        SelectHint(collider);
                         return;
                     }
                 }
@@ -151,6 +157,7 @@ public class JoueurCollision : MonoBehaviour
                     }
                 }
 
+                asVolant = false;
                 contenuCaddie = Contenu.vide;
             }
         }
@@ -158,6 +165,154 @@ public class JoueurCollision : MonoBehaviour
         if (collider.gameObject.CompareTag("DropZone") && boisFait && essenceFait && moteurFait && volantFait)
         {
             FinDuJeu();
+        }
+
+        SelectHint(collider);
+    }
+
+    private void SelectHint(Collider collider)
+    {
+        if (collider.gameObject.CompareTag("SwapZone") && !asCaddie && !asVolant)
+        {
+            AfficherIndice(1); // E
+        }
+
+        else if (collider.gameObject.CompareTag("Caddie"))
+        {
+            if (asVolant)
+            {
+                AfficherIndice(0); // Bateau
+            }
+            if(deuxiemeBras == Bras.bras)
+            {
+                AfficherIndice(2); // Q
+            }
+            else
+            {
+                AfficherIndice(9); // Bras
+            }
+        }
+
+        else if (collider.gameObject.CompareTag("Pickup"))
+        {
+            if(contenuCaddie != Contenu.vide || asVolant)
+            {
+                AfficherIndice(0); // Bateau
+                return;
+            }
+
+            GameObject item = collider.transform.GetChild(0).gameObject;
+            if (item.CompareTag("Bois"))
+            {
+                if (!boisFait)
+                {
+                    if(item.activeSelf)
+                    {
+                        if (asCaddie)
+                        {
+                            AfficherIndice(2); // Q
+                        }
+                        else
+                        {
+                            AfficherIndice(8); // Caddie
+                        }
+                    }
+                    else
+                    {
+                        if (deuxiemeBras == Bras.hache)
+                        {
+                            AfficherIndice(2); // Q
+                        }
+                        else
+                        {
+                            AfficherIndice(11); // Hache
+                        }
+                    }
+                }
+            }
+            else if (item.CompareTag("Volant"))
+            {
+                if (!volantFait)
+                {
+                    if (volantSortie)
+                    {
+                        if (deuxiemeBras == Bras.bras)
+                        {
+                            AfficherIndice(2); // Q
+                        }
+                        else
+                        {
+                            AfficherIndice(9); // Bras
+                        }
+                    }
+                    else
+                    {
+                        if (deuxiemeBras == Bras.pelle)
+                        {
+                            AfficherIndice(2); // Q
+                        }
+                        else
+                        {
+                            AfficherIndice(10); // Pelle
+                        }
+                    }
+                }
+            }
+            else if (item.CompareTag("Moteur"))
+            {
+                if (!moteurFait)
+                {
+                    if (moteurSortie)
+                    {
+                        if (asCaddie)
+                        {
+                            AfficherIndice(2); // Q
+                        }
+                        else
+                        {
+                            AfficherIndice(8); // Caddie
+                        }
+                    }
+                    else
+                    {
+                        if (deuxiemeBras == Bras.piedBiche)
+                        {
+                            AfficherIndice(2); // Q
+                        }
+                        else
+                        {
+                            AfficherIndice(12); // PiedBiche
+                        }
+                    }
+                }
+            }
+            else if (item.CompareTag("Essence") && !asCaddie && !essenceFait)
+            {
+                if (!asCaddie)
+                {
+                    AfficherIndice(8); // Caddie
+                }
+            }
+        }
+
+        else if (collider.gameObject.CompareTag("DropZone"))
+        {
+            if(boisFait == false)
+            {
+                AfficherIndice(4); // Bois
+            }
+            else if (moteurFait == false)
+            {
+                AfficherIndice(5); // Moteur
+            }
+            else if (essenceFait == false)
+            {
+                AfficherIndice(6); // Essence
+            }
+            else if (volantFait == false)
+            {
+                AfficherIndice(7); // Volant
+            }
         }
     }
 
@@ -213,60 +368,98 @@ public class JoueurCollision : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            if (collider.gameObject.CompareTag("Caddie") && deuxiemeBras == Bras.bras)
+            if (!asVolant)
             {
-                if (asCaddie)
+                if (collider.gameObject.CompareTag("Caddie") && deuxiemeBras == Bras.bras)
                 {
-                    Transform espaceCaddie = transform.GetChild(3).transform;
-                    Transform caddie = espaceCaddie.GetChild(0).transform;
-
-                    GameObject tableau = manager.GetTableauActif();
-
-                    caddie.parent = tableau.transform;
-
-                    asCaddie = false;
-                }
-                else
-                {
-                    Transform espaceCaddie = transform.GetChild(3).transform;
-                    collider.transform.parent = espaceCaddie;
-                    asCaddie = true;
-                }
-            }
-
-            if (collider.gameObject.CompareTag("Pickup"))
-            {
-                GameObject item = collider.transform.GetChild(0).gameObject;
-                if (item.CompareTag("Bois") && deuxiemeBras == Bras.hache)
-                {
-                    item.SetActive(true);
-                }
-                
-                if (item.CompareTag("Volant"))
-                {
-                    if (deuxiemeBras == Bras.pelle && !volantSortie)
+                    if (asCaddie)
                     {
-                        collider.gameObject.transform.position += new Vector3(0, 0.5f, 0);
-                        volantSortie = true;
+                        Transform espaceCaddie = transform.GetChild(3).transform;
+                        Transform caddie = espaceCaddie.GetChild(0).transform;
+
+                        GameObject tableau = manager.GetTableauActif();
+
+                        caddie.parent = tableau.transform;
+
+                        asCaddie = false;
                     }
-                    else if (deuxiemeBras == Bras.bras && volantSortie)
+                    else
                     {
-                        // TODO: revoir pick up
-                        volantFait = true;
-                        item.SetActive(false);
+                        CacherIndice();
+                        Transform espaceCaddie = transform.GetChild(3).transform;
+                        collider.transform.parent = espaceCaddie;
+                        asCaddie = true;
                     }
                 }
 
-                if (item.CompareTag("Moteur") && deuxiemeBras == Bras.piedBiche)
+                if (collider.gameObject.CompareTag("Pickup"))
                 {
-                    if (!moteurSortie)
+                    GameObject item = collider.transform.GetChild(0).gameObject;
+                    if (item.CompareTag("Bois") && deuxiemeBras == Bras.hache)
                     {
-                        collider.gameObject.transform.position += new Vector3(-1f, 0, -1f); // TODO: voir distance
-                        moteurSortie = true;
+                        item.SetActive(true);
+                    }
+
+                    if (item.CompareTag("Volant"))
+                    {
+                        if (deuxiemeBras == Bras.pelle && !volantSortie)
+                        {
+                            collider.gameObject.transform.position += new Vector3(0, 0.5f, 0);
+                            volantSortie = true;
+                        }
+                        else if (deuxiemeBras == Bras.bras && volantSortie)
+                        {
+                            asVolant = true;
+                            volantFait = true;
+                            item.SetActive(false);
+                        }
+                    }
+
+                    if (item.CompareTag("Moteur") && deuxiemeBras == Bras.piedBiche)
+                    {
+                        if (!moteurSortie)
+                        {
+                            collider.gameObject.transform.position += new Vector3(-1f, 0, -1f); // TODO: voir distance
+                            moteurSortie = true;
+                        }
                     }
                 }
             }
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        CacherIndice();
+    }
+
+    void AfficherIndice(int index)
+    {
+        if(index == 2 && asCaddie)
+        {
+            return;
+        }
+
+        CacherIndice();
+
+        Transform espaceIndice = transform.GetChild(4).gameObject.transform;
+        GameObject indice = espaceIndice.GetChild(index).gameObject;
+        indice.SetActive(true);
+
+        hintIndex = index;
+    }
+
+    void CacherIndice()
+    {
+        if (!(hintIndex < 0))
+        {
+            transform.GetChild(4).gameObject.transform.GetChild(hintIndex).gameObject.SetActive(false);
+            hintIndex = -1;
+        }
+    }
+
+    public void Update()
+    {
     }
 
     public void FinDuJeu()
