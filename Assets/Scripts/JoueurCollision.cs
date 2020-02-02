@@ -8,12 +8,19 @@ public class JoueurCollision : MonoBehaviour
     public GameManager manager;
 
     private enum Contenu { bois, essence, moteur, vide }
+    private enum Bras { bras, pelle, hache, piedBiche, aucun }
+
     private Contenu contenuCaddie = Contenu.vide;
+    private Bras deuxiemeBras = Bras.aucun;
+
     private bool asCaddie = false;
-    private bool as2eBras = false;
+    private bool moteurSortie = false;
+    private bool volantSortie = false;
+
     private bool boisFait = false;
     private bool essenceFait = false;
     private bool moteurFait = false;
+    private bool volantFait = false;
 
     // Start is called before the first frame update
     void Start()
@@ -98,6 +105,7 @@ public class JoueurCollision : MonoBehaviour
                     {
                         contenuCaddie = Contenu.bois;
                         boisFait = true;
+                        item.SetActive(false);
                     }
                     else
                     {
@@ -108,22 +116,24 @@ public class JoueurCollision : MonoBehaviour
                 {
                     contenuCaddie = Contenu.essence;
                     essenceFait = true;
+                    item.SetActive(false);
                 }
-                else if (item.CompareTag("Moteur"))
+                else if (item.CompareTag("Moteur") && moteurSortie)
                 {
                     contenuCaddie = Contenu.moteur;
                     moteurFait = true;
+                    item.SetActive(false);
                 }
-                collider.transform.GetChild(0).gameObject.SetActive(false);
             }
             else if (collider.gameObject.CompareTag("DropZone") && contenuCaddie != Contenu.vide)
             {
                 contenuCaddie = Contenu.vide;
-                if(boisFait && essenceFait && moteurFait)
-                {
-                    FinDuJeu();
-                }
             }
+        }
+
+        if (collider.gameObject.CompareTag("DropZone") && boisFait && essenceFait && moteurFait && volantFait)
+        {
+            FinDuJeu();
         }
     }
 
@@ -138,7 +148,27 @@ public class JoueurCollision : MonoBehaviour
 
             Transform swapZone = collider.gameObject.transform;
             GameObject newItem = swapZone.GetChild(0).gameObject;
-            as2eBras = newItem.CompareTag("Bras");
+
+            if (newItem.CompareTag("Bras"))
+            {
+                deuxiemeBras = Bras.bras;
+            }
+            else if (newItem.CompareTag("Pelle"))
+            {
+                deuxiemeBras = Bras.pelle;
+            }
+            else if (newItem.CompareTag("Hache"))
+            {
+                deuxiemeBras = Bras.hache;
+            }
+            else if (newItem.CompareTag("PiedBiche"))
+            {
+                deuxiemeBras = Bras.piedBiche;
+            }
+            else
+            {
+                deuxiemeBras = Bras.aucun;
+            }
 
             GameObject bras = transform.GetChild(0).gameObject;
             GameObject oldItem = bras.transform.GetChild(0).gameObject;
@@ -148,26 +178,59 @@ public class JoueurCollision : MonoBehaviour
             newItem.transform.parent = bras.transform;
         }
 
-        if (Input.GetKeyDown(KeyCode.Q) && collider.gameObject.CompareTag("Caddie") && as2eBras)
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            if (asCaddie)
+            if (collider.gameObject.CompareTag("Caddie") && deuxiemeBras == Bras.bras)
             {
-                Transform espaceCaddie = transform.GetChild(1).transform;
-                Transform caddie = espaceCaddie.GetChild(0).transform;
+                if (asCaddie)
+                {
+                    Transform espaceCaddie = transform.GetChild(1).transform;
+                    Transform caddie = espaceCaddie.GetChild(0).transform;
 
-                GameObject tableau = manager.GetTableauActif();
+                    GameObject tableau = manager.GetTableauActif();
 
-                caddie.parent = tableau.transform;
+                    caddie.parent = tableau.transform;
 
-                asCaddie = false;
-            }
-            else
-            {
-                if(as2eBras)
+                    asCaddie = false;
+                }
+                else
                 {
                     Transform espaceCaddie = transform.GetChild(1).transform;
                     collider.transform.parent = espaceCaddie;
                     asCaddie = true;
+                }
+            }
+
+            if (collider.gameObject.CompareTag("Pickup"))
+            {
+                GameObject item = collider.transform.GetChild(0).gameObject;
+                if (item.CompareTag("Bois") && deuxiemeBras == Bras.hache)
+                {
+                    item.SetActive(true);
+                }
+                
+                if (item.CompareTag("Volant"))
+                {
+                    if (deuxiemeBras == Bras.pelle && !volantSortie)
+                    {
+                        collider.gameObject.transform.position += new Vector3(0, 0.5f, 0);
+                        volantSortie = true;
+                    }
+                    else if (deuxiemeBras == Bras.bras && volantSortie)
+                    {
+                        // TODO: revoir pick up
+                        volantFait = true;
+                        item.SetActive(false);
+                    }
+                }
+
+                if (item.CompareTag("Moteur") && deuxiemeBras == Bras.piedBiche)
+                {
+                    if (!moteurSortie)
+                    {
+                        collider.gameObject.transform.position += new Vector3(-1f, 0, -1f); // TODO: voir distance
+                        moteurSortie = true;
+                    }
                 }
             }
         }
