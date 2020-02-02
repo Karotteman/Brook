@@ -81,8 +81,6 @@ public class JoueurCollision : MonoBehaviour
                     coteEntre = GameManager.Cote.erreur;
                     break;
             }
-            print(tableauPositionX);
-            print(tableauPositionY);
 
             if (tableauPositionX != (int)prochainTableau.x || tableauPositionY != (int)prochainTableau.y)
             {
@@ -90,8 +88,8 @@ public class JoueurCollision : MonoBehaviour
 
                 GameManager.Position spawnPoint = manager.ChangementTableau(tableauPositionX, tableauPositionY, coteEntre);
 
-                mouvementJoueur.TeleportationNouveauTableau(spawnPoint.x, spawnPoint.y);
-                Invoke("TrueEnabledMouvementJoueur", 1);
+                mouvementJoueur.TeleportationNouveauTableau(spawnPoint.x, spawnPoint.y, spawnPoint.z);
+                Invoke("TrueEnabledMouvementJoueur", 0.5f);
             }
         }
         else if (asCaddie)
