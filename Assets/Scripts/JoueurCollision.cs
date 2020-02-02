@@ -379,7 +379,7 @@ public class JoueurCollision : MonoBehaviour
         {
             if (!asVolant)
             {
-                if (collider.gameObject.CompareTag("Caddie") && !asCaddie && !dropCaddie)
+                if (collider.gameObject.CompareTag("Caddie") && !asCaddie && !dropCaddie && deuxiemeBras == Bras.bras)
                 {
                     CacherIndice();
                     Transform espaceCaddie = transform.GetChild(3).transform;
