@@ -12,11 +12,13 @@ public class PlayerMouvement : MonoBehaviour
     public float spawnPosition = 4.4f;
 
     CharacterController characterController;
+    Animator anim;
 
     // Use this for initialization
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        anim = transform.GetChild(2).gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -29,6 +31,15 @@ public class PlayerMouvement : MonoBehaviour
     {
         float hInput = Input.GetAxisRaw("Horizontal");
         float vInput = Input.GetAxisRaw("Vertical");
+
+        if(hInput != 0 || vInput != 0)
+        {
+            anim.SetBool("isWalking", true);
+        }
+        else
+        {
+            anim.SetBool("isWalking", false);
+        }
 
         Vector3 direction = new Vector3(hInput, 0, vInput);
 
