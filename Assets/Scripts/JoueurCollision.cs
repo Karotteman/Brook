@@ -383,6 +383,7 @@ public class JoueurCollision : MonoBehaviour
                         GameObject tableau = manager.GetTableauActif();
 
                         caddie.parent = tableau.transform;
+                        
                         asCaddie = false;
                     }
                     else
@@ -462,6 +463,10 @@ public class JoueurCollision : MonoBehaviour
 
     public void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     public void FinDuJeu()
