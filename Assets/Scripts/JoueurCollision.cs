@@ -7,8 +7,13 @@ public class JoueurCollision : MonoBehaviour
     PlayerMouvement mouvementJoueur;
     public GameManager manager;
 
+    private enum Contenu { bois, essence, moteur, vide }
+    private Contenu contenuCaddie = Contenu.vide;
     private bool asCaddie = false;
-    private bool caddieFull = false;
+    private bool as2eBras = false;
+    private bool boisFait = false;
+    private bool essenceFait = false;
+    private bool moteurFait = false;
 
     // Start is called before the first frame update
     void Start()
@@ -82,18 +87,42 @@ public class JoueurCollision : MonoBehaviour
                 Invoke("TrueEnabledMouvementJoueur", 1);
             }
         }
-
-        else if (collider.gameObject.CompareTag("Pickup") && asCaddie)
+        else if (asCaddie)
         {
-            GameObject item = collider.transform.GetChild(0).gameObject;
-            if (item.CompareTag(""))
+            if (collider.gameObject.CompareTag("Pickup") && contenuCaddie == Contenu.vide)
             {
+                GameObject item = collider.transform.GetChild(0).gameObject;
+                if (item.CompareTag("Bois"))
+                {
+                    if (!boisFait)
+                    {
+                        contenuCaddie = Contenu.bois;
+                        boisFait = true;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                else if (item.CompareTag("Essence"))
+                {
+                    contenuCaddie = Contenu.essence;
+                    essenceFait = true;
+                }
+                else if (item.CompareTag("Moteur"))
+                {
+                    contenuCaddie = Contenu.moteur;
+                    moteurFait = true;
+                }
+                collider.transform.GetChild(0).gameObject.SetActive(false);
             }
-            else if(item.CompareTag(""))
+            else if (collider.gameObject.CompareTag("DropZone") && contenuCaddie != Contenu.vide)
             {
-            }
-            else if (item.CompareTag(""))
-            {
+                contenuCaddie = Contenu.vide;
+                if(boisFait && essenceFait && moteurFait)
+                {
+                    FinDuJeu();
+                }
             }
         }
     }
@@ -109,6 +138,7 @@ public class JoueurCollision : MonoBehaviour
 
             Transform swapZone = collider.gameObject.transform;
             GameObject newItem = swapZone.GetChild(0).gameObject;
+            as2eBras = newItem.CompareTag("Bras");
 
             GameObject bras = transform.GetChild(0).gameObject;
             GameObject oldItem = bras.transform.GetChild(0).gameObject;
@@ -118,7 +148,7 @@ public class JoueurCollision : MonoBehaviour
             newItem.transform.parent = bras.transform;
         }
 
-        if (Input.GetKeyDown(KeyCode.Q) && collider.gameObject.CompareTag("Caddie"))
+        if (Input.GetKeyDown(KeyCode.Q) && collider.gameObject.CompareTag("Caddie") && as2eBras)
         {
             if (asCaddie)
             {
@@ -128,16 +158,28 @@ public class JoueurCollision : MonoBehaviour
                 GameObject tableau = manager.GetTableauActif();
 
                 caddie.parent = tableau.transform;
+
+                asCaddie = false;
             }
             else
             {
-                if(true) // (robot have 2 arms)
+                if(as2eBras)
                 {
                     Transform espaceCaddie = transform.GetChild(1).transform;
                     collider.transform.parent = espaceCaddie;
+                    asCaddie = true;
                 }
             }
-            asCaddie = !asCaddie;
         }
+    }
+
+    public void FinDuJeu()
+    {
+        transform.position += new Vector3(0,5,0);
+        Reinitialiser();
+    }
+
+    public void Reinitialiser()
+    {
     }
 }
