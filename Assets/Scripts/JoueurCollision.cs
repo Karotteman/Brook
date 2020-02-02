@@ -383,8 +383,7 @@ public class JoueurCollision : MonoBehaviour
                         GameObject tableau = manager.GetTableauActif();
 
                         caddie.parent = tableau.transform;
-
-<<<<<<< HEAD
+                        
                         asCaddie = false;
                     }
                     else
@@ -394,16 +393,6 @@ public class JoueurCollision : MonoBehaviour
                         collider.transform.parent = espaceCaddie;
                         asCaddie = true;
                     }
-=======
-                    asCaddie = false;
-                }
-                else
-                {
-                    Transform espaceCaddie = transform.GetChild(3).transform;
-                    collider.transform.parent = espaceCaddie;
-                    print(espaceCaddie);
-                    asCaddie = true;
->>>>>>> e354071a87ca64e84c74d0f7e1591a19ab41bddd
                 }
 
                 if (collider.gameObject.CompareTag("Pickup"))
@@ -474,6 +463,10 @@ public class JoueurCollision : MonoBehaviour
 
     public void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     public void FinDuJeu()
