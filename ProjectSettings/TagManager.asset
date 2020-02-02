@@ -9,6 +9,7 @@ TagManager:
   - PieceBateau
   - SwapZone
   - Caddie
+  - Pickup
   layers:
   - Default
   - TransparentFX
