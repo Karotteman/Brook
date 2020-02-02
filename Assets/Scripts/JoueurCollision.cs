@@ -12,6 +12,7 @@ public class JoueurCollision : MonoBehaviour
 
     private Contenu contenuCaddie = Contenu.vide;
     private Bras deuxiemeBras = Bras.aucun;
+    private AudioSource audio;
 
     private bool asCaddie = false;
     private bool moteurSortie = false;
@@ -26,6 +27,7 @@ public class JoueurCollision : MonoBehaviour
     void Start()
     {
         mouvementJoueur = GetComponentInParent<PlayerMouvement>();
+        audio = GetComponentInParent<AudioSource>();
     }
 
     public void TrueEnabledMouvementJoueur()
@@ -150,6 +152,7 @@ public class JoueurCollision : MonoBehaviour
                 }
 
                 contenuCaddie = Contenu.vide;
+                collider.gameObject.GetComponent<AudioSource>().Play();
             }
         }
 
@@ -207,9 +210,11 @@ public class JoueurCollision : MonoBehaviour
             oldItem.SetActive(true);
             newItem.transform.parent = espaceBras.transform;
             newItem.SetActive(false);
+
+            audio.Play();
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             if (collider.gameObject.CompareTag("Caddie") && deuxiemeBras == Bras.bras)
             {
@@ -228,6 +233,7 @@ public class JoueurCollision : MonoBehaviour
                 {
                     Transform espaceCaddie = transform.GetChild(3).transform;
                     collider.transform.parent = espaceCaddie;
+                    print(espaceCaddie);
                     asCaddie = true;
                 }
             }
