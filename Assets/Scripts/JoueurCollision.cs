@@ -140,25 +140,4 @@ public class JoueurCollision : MonoBehaviour
             asCaddie = !asCaddie;
         }
     }
-
-    public void OnTriggerStay(Collider collider)
-    {
-        if (collider.gameObject.CompareTag("SwapZone"))
-        {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    Transform swapZone = collider.gameObject.transform;
-                    GameObject newItem = swapZone.GetChild(0).gameObject;
-
-                    GameObject temp = transform.GetChild(0).gameObject;
-                    GameObject oldItem = temp.transform.GetChild(0).gameObject;
-
-                    oldItem.transform.parent = swapZone;
-                    newItem.transform.parent = temp.transform;
-                }
-            }
-        }
-    }
 }
