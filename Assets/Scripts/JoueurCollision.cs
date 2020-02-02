@@ -92,11 +92,12 @@ public class JoueurCollision : MonoBehaviour
                     Transform swapZone = collider.gameObject.transform;
                     GameObject newItem = swapZone.GetChild(0).gameObject;
 
-                    GameObject temp = transform.GetChild(0).gameObject;
-                    GameObject oldItem = temp.transform.GetChild(0).gameObject;
+                    GameObject bras = transform.GetChild(0).gameObject;
+                    GameObject oldItem = bras.transform.GetChild(0).gameObject;
 
                     oldItem.transform.parent = swapZone;
-                    newItem.transform.parent = temp.transform;
+                    oldItem.transform.position = swapZone.transform.position;
+                    newItem.transform.parent = bras.transform;
                 }
             }
         }
