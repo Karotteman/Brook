@@ -89,15 +89,17 @@ public class JoueurCollision : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    Transform swapZone = collider.gameObject.transform;
+                    Transform swapZone = collider.gameObject.transform;                    
                     GameObject newItem = swapZone.GetChild(0).gameObject;
 
                     GameObject bras = transform.GetChild(0).gameObject;
-                    GameObject oldItem = bras.transform.GetChild(0).gameObject;
+                    GameObject oldItem = bras.transform.GetChild(bras.transform.childCount-1).gameObject;
 
                     oldItem.transform.parent = swapZone;
                     oldItem.transform.position = swapZone.transform.position;
+                    oldItem.SetActive(true);
                     newItem.transform.parent = bras.transform;
+                    newItem.SetActive(false);
                 }
             }
         }
