@@ -127,6 +127,30 @@ public class JoueurCollision : MonoBehaviour
             }
             else if (collider.gameObject.CompareTag("DropZone") && contenuCaddie != Contenu.vide)
             {
+                Transform bateau = collider.gameObject.transform.GetChild(0);
+                string tag = "";
+                if (contenuCaddie == Contenu.bois)
+                {
+                    tag = "Bois";
+                }
+                else if (contenuCaddie == Contenu.moteur)
+                {
+                    tag = "Moteur";
+                }
+
+                if (!System.String.IsNullOrEmpty(tag))
+
+                {
+                    foreach (Transform group in bateau)
+                    {
+                        if (group.CompareTag(tag))
+                        {
+                            group.gameObject.SetActive(true);
+                            break;
+                        }
+                    }
+                }
+
                 contenuCaddie = Contenu.vide;
             }
         }
@@ -170,12 +194,12 @@ public class JoueurCollision : MonoBehaviour
                 deuxiemeBras = Bras.aucun;
             }
 
-            GameObject bras = transform.GetChild(0).gameObject;
-            GameObject oldItem = bras.transform.GetChild(0).gameObject;
+            GameObject espaceBras = transform.GetChild(2).gameObject;
+            GameObject oldItem = espaceBras.transform.GetChild(0).gameObject;
             
             oldItem.transform.parent = swapZone;
             oldItem.transform.position = swapZone.transform.position;
-            newItem.transform.parent = bras.transform;
+            newItem.transform.parent = espaceBras.transform;
         }
 
         if (Input.GetKeyDown(KeyCode.Q))
@@ -184,7 +208,7 @@ public class JoueurCollision : MonoBehaviour
             {
                 if (asCaddie)
                 {
-                    Transform espaceCaddie = transform.GetChild(1).transform;
+                    Transform espaceCaddie = transform.GetChild(3).transform;
                     Transform caddie = espaceCaddie.GetChild(0).transform;
 
                     GameObject tableau = manager.GetTableauActif();
@@ -195,7 +219,7 @@ public class JoueurCollision : MonoBehaviour
                 }
                 else
                 {
-                    Transform espaceCaddie = transform.GetChild(1).transform;
+                    Transform espaceCaddie = transform.GetChild(3).transform;
                     collider.transform.parent = espaceCaddie;
                     asCaddie = true;
                 }
@@ -238,7 +262,7 @@ public class JoueurCollision : MonoBehaviour
 
     public void FinDuJeu()
     {
-        transform.position += new Vector3(0,5,0);
+        transform.position += new Vector3(0,-5,0);
         Reinitialiser();
     }
 

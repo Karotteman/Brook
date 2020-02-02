@@ -18,7 +18,7 @@ public class PlayerMouvement : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-        anim = transform.GetChild(2).gameObject.GetComponent<Animator>();
+        anim = transform.GetChild(1).gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
