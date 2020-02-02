@@ -17,6 +17,7 @@ public class JoueurCollision : MonoBehaviour
     private AudioSource audio;
 
     private bool asCaddie = false;
+    private bool dropCaddie = false;
     private bool asVolant = false;
 
     private bool boisSortie = false;
@@ -27,6 +28,9 @@ public class JoueurCollision : MonoBehaviour
     private bool essenceFait = false;
     private bool moteurFait = false;
     private bool volantFait = false;
+
+    private bool FisPress = false;
+    private bool EisPress = false;
 
     private int hintIndex = -1;
 
@@ -313,7 +317,7 @@ public class JoueurCollision : MonoBehaviour
 
     public void OnTriggerStay(Collider collider)
     {
-        if (Input.GetKeyDown(KeyCode.E) && collider.gameObject.CompareTag("SwapZone"))
+        if (EisPress && collider.gameObject.CompareTag("SwapZone"))
         {
             if (asCaddie)
             {
@@ -363,38 +367,21 @@ public class JoueurCollision : MonoBehaviour
             audio.Play();
         }
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (FisPress)
         {
             if (!asVolant)
             {
-                if (collider.gameObject.CompareTag("Caddie") && deuxiemeBras == Bras.bras)
+                if (collider.gameObject.CompareTag("Caddie") && !asCaddie && !dropCaddie)
                 {
-                    if (asCaddie)
-                    {
-                        Transform espaceCaddie = transform.GetChild(3).transform;
-                        Transform caddie = espaceCaddie.GetChild(0).transform;
+                    CacherIndice();
+                    Transform espaceCaddie = transform.GetChild(3).transform;
 
-                        GameObject tableau = manager.GetTableauActif();
+                    collider.transform.parent = espaceCaddie;
+                    collider.gameObject.SetActive(false);
 
-                        caddie.parent = tableau.transform;
-                        //caddie.gameObject.SetActive(true);
-
-                        //GameObject caddieAlligne = transform.GetChild(5).gameObject;
-                        //caddieAlligne.SetActive(false);
-                        asCaddie = false;
-                    }
-                    else
-                    {
-                        CacherIndice();
-                        Transform espaceCaddie = transform.GetChild(3).transform;
-
-                        collider.transform.parent = espaceCaddie;
-                        //collider.gameObject.SetActive(false);
-
-                        //GameObject caddieAlligne = transform.GetChild(5).gameObject;
-                        //caddieAlligne.SetActive(true);
-                        asCaddie = true;
-                    }
+                    GameObject caddieAlligne = transform.GetChild(5).gameObject;
+                    caddieAlligne.SetActive(true);
+                    asCaddie = true;
                 }
 
                 if (collider.gameObject.CompareTag("Pickup"))
@@ -463,12 +450,31 @@ public class JoueurCollision : MonoBehaviour
             hintIndex = -1;
         }
     }
-
+    
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
+        }
+        EisPress = Input.GetKeyDown(KeyCode.E);
+        FisPress = Input.GetKeyDown(KeyCode.F);
+
+        dropCaddie = false;
+        if (FisPress && asCaddie)
+        {
+            Transform espaceCaddie = transform.GetChild(3).transform;
+            Transform caddie = espaceCaddie.GetChild(0).transform;
+
+            GameObject tableau = manager.GetTableauActif();
+
+            caddie.parent = tableau.transform;
+            caddie.gameObject.SetActive(true);
+
+            GameObject caddieAlligne = transform.GetChild(5).gameObject;
+            caddieAlligne.SetActive(false);
+            asCaddie = false;
+            dropCaddie = true;
         }
     }
 
