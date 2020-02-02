@@ -136,6 +136,7 @@ public class JoueurCollision : MonoBehaviour
                     moteurFait = true;
                     item.SetActive(false);
                 }
+                transform.GetChild(3).transform.gameObject.GetComponent<AudioSource>().Play();
             }
             else if (collider.gameObject.CompareTag("DropZone") && contenuCaddie != Contenu.vide)
             {
