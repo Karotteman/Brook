@@ -8,7 +8,7 @@ public class JoueurCollision : MonoBehaviour
     public GameManager manager;
 
     private enum Contenu { bois, essence, moteur, vide }
-    private enum Bras { bras, pelle, hache, piedBiche, aucun }
+    private enum Bras { pelle, piedBiche, hache, bras, aucun }
 
     private Contenu contenuCaddie = Contenu.vide;
     private Bras deuxiemeBras = Bras.aucun;
@@ -173,9 +173,12 @@ public class JoueurCollision : MonoBehaviour
             Transform swapZone = collider.gameObject.transform;
             GameObject newItem = swapZone.GetChild(0).gameObject;
 
+            transform.GetChild(0).gameObject.transform.GetChild((int)deuxiemeBras).gameObject.SetActive(false);
+
             if (newItem.CompareTag("Bras"))
             {
                 deuxiemeBras = Bras.bras;
+
             }
             else if (newItem.CompareTag("Pelle"))
             {
@@ -193,13 +196,19 @@ public class JoueurCollision : MonoBehaviour
             {
                 deuxiemeBras = Bras.aucun;
             }
+            transform.GetChild(0).gameObject.transform.GetChild((int)deuxiemeBras).gameObject.SetActive(true);
+            //GameObject bras = transform.GetChild(0).gameObject;
+            //GameObject oldItem = bras.transform.GetChild(0).gameObject;
+            //GameObject oldItem = bras.transform.GetChild(bras.transform.childCount-1).gameObject;
 
             GameObject espaceBras = transform.GetChild(2).gameObject;
             GameObject oldItem = espaceBras.transform.GetChild(0).gameObject;
             
             oldItem.transform.parent = swapZone;
             oldItem.transform.position = swapZone.transform.position;
+            oldItem.SetActive(true);
             newItem.transform.parent = espaceBras.transform;
+            newItem.SetActive(false);
         }
 
         if (Input.GetKeyDown(KeyCode.Q))

@@ -16,11 +16,11 @@ public class Bateau : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collider)
     {
-        if (collision.gameObject.CompareTag("Caddie"))
+        if (collider.gameObject.CompareTag("Caddie"))
         {
-            switch (collision.gameObject.transform.GetChild(0).gameObject.name)
+            switch (collider.gameObject.transform.GetChild(0).gameObject.name)
             {
                 case "Bois":
                     break;
