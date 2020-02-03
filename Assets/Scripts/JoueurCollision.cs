@@ -105,6 +105,14 @@ public class JoueurCollision : MonoBehaviour
                 Invoke("TrueEnabledMouvementJoueur", 0.5f);
             }
         }
+
+        else if (asVolant && collider.gameObject.CompareTag("DropZone"))
+        {
+            asVolant = false;
+            volantFait = true;
+            return;
+        }
+
         else if (asCaddie)
         {
             if (collider.gameObject.CompareTag("Pickup") && contenuCaddie == Contenu.vide)
@@ -115,7 +123,6 @@ public class JoueurCollision : MonoBehaviour
                     if (!boisFait && boisSortie)
                     {
                         contenuCaddie = Contenu.bois;
-                        boisFait = true;
                         item.SetActive(false);
                         SetCaddieActiveByTag("Bois", true);
                     }
@@ -125,7 +132,6 @@ public class JoueurCollision : MonoBehaviour
                     if (!essenceFait)
                     {
                         contenuCaddie = Contenu.essence;
-                        essenceFait = true;
                         item.SetActive(false);
                         SetCaddieActiveByTag("Essence", true);
                     }
@@ -133,34 +139,29 @@ public class JoueurCollision : MonoBehaviour
                 else if (item.CompareTag("Moteur") && !moteurFait && moteurSortie)
                 {
                     contenuCaddie = Contenu.moteur;
-                    moteurFait = true;
                     item.SetActive(false);
                     SetCaddieActiveByTag("Moteur", true);
                 }
                 transform.GetChild(3).transform.gameObject.GetComponent<AudioSource>().Play();
             }
-            else if (collider.gameObject.CompareTag("DropZone"))
+            else if (collider.gameObject.CompareTag("DropZone") && contenuCaddie != Contenu.vide)
             {
-                asVolant = false;
-
-                if(contenuCaddie == Contenu.vide)
-                {
-                    return;
-                }
-
                 Transform bateau = collider.gameObject.transform.GetChild(0);
                 string tag = "";
                 if (contenuCaddie == Contenu.bois)
                 {
                     tag = "Bois";
+                    boisFait = true;
                 }
                 else if (contenuCaddie == Contenu.moteur)
                 {
                     tag = "Moteur";
+                    moteurFait = true;
                 }
                 else if (contenuCaddie == Contenu.essence)
                 {
                     tag = "Essence";
+                    essenceFait = true;
                 }
 
                 if (!System.String.IsNullOrEmpty(tag))
@@ -417,7 +418,6 @@ public class JoueurCollision : MonoBehaviour
                         else if (deuxiemeBras == Bras.bras && volantSortie)
                         {
                             asVolant = true;
-                            volantFait = true;
                             item.SetActive(false);
                         }
                     }
