@@ -17,7 +17,6 @@ public class JoueurCollision : MonoBehaviour
     private AudioSource audio;
 
     private bool asCaddie = false;
-    private bool dropCaddie = false;
     private bool asVolant = false;
 
     private bool boisSortie = false;
@@ -29,8 +28,10 @@ public class JoueurCollision : MonoBehaviour
     private bool moteurFait = false;
     private bool volantFait = false;
 
-    private bool FisPress = false;
-    private bool EisPress = false;
+    private bool UseIsPress = false;
+    private bool UseIsRelease = true;
+    private bool SwapIsPress = false;
+    private bool SwapIsRelease = true;
 
     private int hintIndex = -1;
 
@@ -332,8 +333,9 @@ public class JoueurCollision : MonoBehaviour
 
     public void OnTriggerStay(Collider collider)
     {
-        if (EisPress && collider.gameObject.CompareTag("SwapZone"))
+        if (SwapIsPress && collider.gameObject.CompareTag("SwapZone"))
         {
+            SwapIsPress = false;
             if (asCaddie)
             {
                 return;
@@ -382,11 +384,12 @@ public class JoueurCollision : MonoBehaviour
             audio.Play();
         }
 
-        if (FisPress)
+        if (UseIsPress)
         {
+            UseIsPress = false;
             if (!asVolant)
             {
-                if (collider.gameObject.CompareTag("Caddie") && !asCaddie && !dropCaddie && deuxiemeBras == Bras.bras)
+                if (collider.gameObject.CompareTag("Caddie") && !asCaddie && deuxiemeBras == Bras.bras)
                 {
                     CacherIndice();
                     Transform espaceCaddie = transform.GetChild(3).transform;
@@ -480,16 +483,42 @@ public class JoueurCollision : MonoBehaviour
     
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetAxisRaw("Cancel") != 0)
         {
             Application.Quit();
         }
-        EisPress = Input.GetKeyDown(KeyCode.E);
-        FisPress = Input.GetKeyDown(KeyCode.F);
 
-        dropCaddie = false;
-        if (FisPress && asCaddie)
+        if (Input.GetAxisRaw("Swap") != 0)
         {
+            if (SwapIsRelease)
+            {
+                SwapIsPress = true;
+                SwapIsRelease = false;
+            }
+        }
+        else
+        {
+            SwapIsRelease = true;
+            SwapIsPress = false;
+        }
+
+        if (Input.GetAxisRaw("Use") != 0)
+        {
+            if (UseIsRelease)
+            {
+                UseIsPress = true;
+                UseIsRelease = false;
+            }
+        }
+        else
+        {
+            UseIsRelease = true;
+            UseIsPress = false;
+        }
+
+        if (UseIsPress && asCaddie)
+        {
+            UseIsPress = false;
             Transform espaceCaddie = transform.GetChild(3).transform;
             Transform caddie = espaceCaddie.GetChild(0).transform;
 
@@ -501,7 +530,6 @@ public class JoueurCollision : MonoBehaviour
             GameObject caddieAlligne = transform.GetChild(5).gameObject;
             caddieAlligne.SetActive(false);
             asCaddie = false;
-            dropCaddie = true;
         }
     }
 
