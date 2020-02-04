@@ -32,23 +32,25 @@ public class PlayerMouvement : MonoBehaviour
         float hInput = Input.GetAxisRaw("Horizontal");
         float vInput = Input.GetAxisRaw("Vertical");
 
-        if(hInput != 0 || vInput != 0)
+        Vector3 direction = new Vector3(hInput, 0, vInput);
+        characterController.SimpleMove(direction * walkSpeed * Time.deltaTime);
+
+
+        if (direction != new Vector3(0,0,0) && !anim.GetBool("isWalking"))
         {
+            print("OUI : " + direction);
             anim.SetBool("isWalking", true);
         }
         else
         {
+            print("NON : " + direction);
             anim.SetBool("isWalking", false);
         }
 
-        Vector3 direction = new Vector3(hInput, 0, vInput);
-
-        if(direction != Vector3.zero)
+        if (direction != Vector3.zero)
         {
             transform.rotation = Quaternion.LookRotation(direction);
         }
-        characterController.SimpleMove(direction * walkSpeed * Time.deltaTime);
-
         transform.GetChild(4).transform.rotation = Quaternion.identity;
     }
 

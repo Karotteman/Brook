@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
     
     void Start()
     {
+        Application.targetFrameRate = 60;
+
+
         int nbRow = 3;
         int nbCol = 3;
         
@@ -104,7 +107,6 @@ public class GameManager : MonoBehaviour
         GameObject current = matrixTableaux[tableauPositionX][tableauPositionY];
 
         current.SetActive(true);
-        print(current.name);
         SpawnPoint spawn = current.GetComponent<SpawnPoint>();
 
         switch(coteEntre)
