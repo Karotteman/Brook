@@ -190,10 +190,10 @@ public class JoueurCollision : MonoBehaviour
             FinDuJeu();
         }
 
-        SelectHint(collider);
+        ChoisirIndice(collider);
     }
 
-    private void SelectHint(Collider collider)
+    private void ChoisirIndice(Collider collider)
     {
         if (collider.gameObject.CompareTag("SwapZone") && !asCaddie && !asVolant)
         {
@@ -435,6 +435,8 @@ public class JoueurCollision : MonoBehaviour
                     }
                 }
             }
+
+            ChoisirIndice(collider);
         }
     }
 
